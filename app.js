@@ -8,7 +8,7 @@
   const REQUIRED = ['line', 'day', 'item', 'currency', 'units', 'unit_sale', 'unit_cost'];
   const SUM_FIELDS = ['quantity', 'sales', 'cost', 'profit'];
 
-  function parseCsv(text) {
+  function readTable(text) {
     text = String(text || '').replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
     const matrix = [];
     let row = [], cell = '', quoted = false, closed = false;
@@ -32,13 +32,20 @@
     while (matrix.length && matrix.at(-1).every(value => value === '')) matrix.pop();
     if (matrix.length < 2) throw new Error('EMPTY_SOURCE');
     const header = matrix[0].map(value => value.trim());
+    if (header.some(field => !field)) throw new Error('EMPTY_COLUMN_NAME');
+    if (new Set(header).size !== header.length) throw new Error('DUPLICATE_COLUMNS');
+    const data = matrix.slice(1).map((values, index) => {
+      if (values.length !== header.length) throw new Error(`COLUMN_COUNT_MISMATCH:${index + 1}`);
+      return values.map(value => value.trim());
+    });
+    return { header, data };
+  }
+
+  function parseCsv(text) {
+    const { header, data } = readTable(text);
     const missing = REQUIRED.filter(field => !header.includes(field));
     if (missing.length) throw new Error(`MISSING_COLUMNS:${missing.join('|')}`);
-    if (new Set(header).size !== header.length) throw new Error('DUPLICATE_COLUMNS');
-    return matrix.slice(1).map((values, index) => {
-      if (values.length !== header.length) throw new Error(`COLUMN_COUNT_MISMATCH:${index + 1}`);
-      return Object.fromEntries(header.map((field, offset) => [field, values[offset].trim()]));
-    });
+    return data.map(values => Object.fromEntries(header.map((field, offset) => [field, values[offset]])));
   }
 
   function validDate(value) {
@@ -128,5 +135,5 @@
     return [columns, ...result.issues.map(item => columns.map(key => item[key] || ''))]
       .map(row => row.map(quote).join(',')).join('\r\n') + '\r\n';
   }
-  return { parseCsv, analyzeCsv, dailyCsv, issuesCsv, money };
+  return { readTable, parseCsv, analyzeCsv, dailyCsv, issuesCsv, money };
 });

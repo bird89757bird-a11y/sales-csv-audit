@@ -1,0 +1,38 @@
+{
+  "name": "自动化试点需求 / Pilot request",
+  "description": "描述一个重复的数据处理问题，先评估范围。",
+  "title": "[Pilot] ",
+  "body": [
+    {
+      "type": "markdown",
+      "attributes": { "value": "这里是公开 GitHub Issue，需要 GitHub 账号。请仅用合成描述，不要上传销售原始文件、客户标识、账号或密钥。提交后先讨论一个来源、一个输出和验收口径；提交不代表报价或交付承诺。" }
+    },
+    {
+      "type": "textarea", "id": "problem",
+      "attributes": { "label": "想减少哪一步人工操作？ / Repeated task", "placeholder": "例如每周合并一个销售导出，检查重复行，输出日报和异常清单。" },
+      "validations": { "required": true }
+    },
+    {
+      "type": "dropdown", "id": "frequency",
+      "attributes": { "label": "发生频率 / Frequency", "options": ["每天 / Daily", "每周 / Weekly", "每月 / Monthly", "偶尔 / Occasionally"] },
+      "validations": { "required": true }
+    },
+    {
+      "type": "textarea", "id": "acceptance",
+      "attributes": { "label": "期望输出与验收 / Output and acceptance", "placeholder": "用合成例子说明一个正确结果、一个异常结果；注明是销售、退款、费用还是到账金额。" },
+      "validations": { "required": true }
+    },
+    {
+      "type": "input", "id": "effort",
+      "attributes": { "label": "当前每次大约耗时 / Current effort", "placeholder": "例如每次 30 分钟；不知道可留空。" }
+    },
+    {
+      "type": "dropdown", "id": "discovery",
+      "attributes": { "label": "从哪里发现工具？ / Discovery", "options": ["GitHub", "X", "搜索 / Search", "朋友推荐 / Referral", "其他 / Other"] }
+    },
+    {
+      "type": "checkboxes", "id": "public-confirmation",
+      "attributes": { "label": "公开提交 / Public submission", "options": [{ "label": "我知道内容公开，已使用合成描述，不含原始客户数据。", "required": true }] }
+    }
+  ]
+}

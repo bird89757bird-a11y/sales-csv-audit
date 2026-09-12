@@ -48,6 +48,15 @@
     .cta p { color:#d4ddd8; margin:4px 0 0; }
     #notice { min-height:24px; color:var(--green); font-weight:700; }
     .hidden { display:none; }
+    a { color:var(--green); }
+    .mapping, .pilot { margin-top:18px; }
+    .form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    select { width:100%; min-width:0; padding:10px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--ink); font:inherit; }
+    .check { margin:16px 0; font-weight:500; }
+    .hint { color:var(--muted); font-size:14px; }
+    .link-button { display:inline-block; border:1px solid #a8bcb0; border-radius:999px; padding:10px 16px; text-decoration:none; font-weight:750; }
+    #briefPreview { min-height:260px; }
+    @media (max-width:600px) { .form-grid { grid-template-columns:1fr; } }
     @media (max-width:820px) { header,.input-grid,.tables { grid-template-columns:1fr; } .metrics { grid-template-columns:repeat(2,1fr); } header { align-items:start; } .cta { flex-direction:column; align-items:flex-start; } }
   </style>
 </head>
@@ -61,8 +70,16 @@
   <section class="card input-grid">
     <div><label for="csvText">粘贴 CSV / Paste CSV</label><textarea id="csvText" spellcheck="false" placeholder="source,line,day,item,currency,units,unit_sale,unit_cost"></textarea></div>
     <div class="drop"><div><label for="csvFile">选择本地 CSV / Choose a local file</label><input id="csvFile" type="file" accept=".csv,text/csv"><p>必填：line, day, item, currency, units, unit_sale, unit_cost<br><small>source 可选；当前金额口径只接受 USD 与两位小数。</small></p></div></div>
-    <div class="actions"><button id="sampleButton" class="secondary">加载合成示例</button><button id="auditButton">开始审计</button><button id="clearButton" class="ghost">清空</button></div>
+    <div class="actions"><button id="sampleButton" class="secondary">加载合成示例</button><button id="auditButton">开始审计</button><button id="mappingButton" class="ghost">对应我的表头</button><button id="clearButton" class="ghost">清空</button><a id="templateLink" class="link-button" href="template.csv" download="sales-template.csv">下载输入模板</a></div>
     <div id="notice" role="status" aria-live="polite"></div>
+  </section>
+
+  <section id="mappingPanel" class="card mapping hidden" aria-labelledby="mappingTitle">
+    <h2 id="mappingTitle">把你的列对应到所需字段</h2>
+    <p class="hint">列名建议仅供确认。只对应列，不改日期、金额或币种；订单总额不能直接当作单件售价。多行订单请使用每行独立编号。</p>
+    <div id="mappingFields" class="form-grid"></div>
+    <label class="check"><input id="mappingConfirmed" type="checkbox"> 我已核对列的含义，金额列为单件售价 / 单件成本，币种为 USD。</label>
+    <button id="applyMapping">按此对应审计</button>
   </section>
 
   <section id="result" class="hidden" aria-live="polite">
@@ -75,8 +92,22 @@
       <div class="card"><h2>待复核 / Issues</h2><div class="scroll"><table><thead><tr><th>Row</th><th>Source</th><th>Line</th><th>Code</th></tr></thead><tbody id="issueBody"></tbody></table></div><div class="actions"><button id="downloadIssues">下载 issues.csv</button></div></div>
     </div>
     <div class="boundary"><strong>能力边界：</strong>这是 CSV 预审，不是会计结论。Simplified profit = sales − unit cost；不含税、退款、折扣、运费、平台费或汇率。当前工具不连接实时网页、邮箱或 11 个来源，不生成 XLSX，也不代表客户数据已完整对账。</div>
-    <div class="card cta"><div><strong>需要把真实来源每天自动合并？</strong><p>复制一段不含隐私的字段样例和异常需求，先定义一个代表性付费试点。</p></div><button id="copyBrief" class="secondary">复制试点需求模板</button></div>
   </section>
+
+  <section class="card pilot" aria-labelledby="pilotTitle">
+    <h2 id="pilotTitle">想减少每次手工整理的时间？</h2>
+    <p>先描述一个来源、一个期望输出和一个失败例子，再确认付费试点的范围与验收。</p>
+    <div class="form-grid">
+      <div><label for="pilotNeed">最想解决的步骤</label><select id="pilotNeed"><option>每天重复整理报表</option><option>检查一份 CSV</option><option>比较两份报表的差异</option></select></div>
+      <div><label for="pilotFrequency">发生频率</label><select id="pilotFrequency"><option>每天</option><option>每周</option><option>每月</option><option>偶尔</option></select></div>
+      <div><label for="pilotDiscovery">从哪里发现工具？（可选）</label><select id="pilotDiscovery"><option>未选择</option><option>GitHub</option><option>X</option><option>搜索</option><option>朋友推荐</option><option>其他</option></select></div>
+    </div>
+    <details style="margin-top:14px"><summary>预览需求草稿</summary><label for="briefPreview" class="hint">草稿仅使用上面的选项，不读取你的 CSV 内容。</label><textarea id="briefPreview" readonly></textarea></details>
+    <div class="actions"><button id="downloadBrief">下载需求草稿</button><button id="copyBrief" class="secondary">复制需求草稿</button><a id="requestPilot" class="link-button" href="https://github.com/bird89757bird-a11y/sales-csv-audit/issues/new?template=pilot.yml" target="_blank" rel="noopener noreferrer">通过 GitHub 提交（公开）</a></div>
+    <p class="hint">下载和复制都只在本地进行。GitHub 提交需要账号，内容公开，请只填写合成描述；网页不会替你提交。也可以把草稿交给已有联系人。</p>
+    <div id="pilotNotice" role="status" aria-live="polite"></div>
+  </section>
+  <p class="hint"><a href="https://github.com/bird89757bird-a11y/sales-csv-audit" target="_blank" rel="noopener noreferrer">查看源码与 MIT 许可证</a> · CSV ONLY · 退款、费用、库存、跨表对账及实时接入需要另行评估。</p>
 </main>
 <script id="sampleData" type="text/plain">source,line,day,item,currency,units,unit_sale,unit_cost
 local_html,DEMO-1,2026-09-01,ITEM-A,USD,3,19.99,8.25
@@ -89,8 +120,9 @@ local_email,DEMO-3,2026-09-03,ITEM-C,USD,3,0.10,0.03
 local_email,EMAIL-5,2026-09-03,ITEM-E,USD,1,9.99,4.00
 local_email,EMAIL-MISSING,2026-09-03,ITEM-X,USD,1,5.00,</script>
 <script src="app.js"></script>
+<script src="intake.js"></script>
 <script>
-  const byId = id => document.getElementById(id); let current = null;
+  const byId = id => document.getElementById(id); let current = null, mappingText = null, loadVersion = 0;
   const setText = (id,value) => { byId(id).textContent = value; };
   const td = value => { const cell=document.createElement('td'); cell.textContent=value; return cell; };
   function render(result) {
@@ -103,13 +135,42 @@ local_email,EMAIL-MISSING,2026-09-03,ITEM-X,USD,1,5.00,</script>
     byId('issueBody').replaceChildren(...result.issues.map(issue=>{const row=document.createElement('tr');[issue.row,issue.source||'',issue.line||'',issue.code].forEach(value=>row.append(td(value)));return row;}));
     byId('downloadDaily').disabled=!result.daily.length; byId('downloadIssues').disabled=!result.issues.length;
   }
-  function download(name,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\uFEFF'+text],{type:'text/csv;charset=utf-8'}));a.download=name;a.click();URL.revokeObjectURL(a.href);}
-  byId('sampleButton').onclick=()=>{byId('csvText').value=byId('sampleData').textContent.trim()+'\n';setText('notice','已加载合成示例 / Synthetic sample loaded');};
-  byId('auditButton').onclick=()=>{render(SalesAudit.analyzeCsv(byId('csvText').value));setText('notice','审计完成；请先看状态和 Issues。');};
-  byId('clearButton').onclick=()=>{byId('csvText').value='';byId('csvFile').value='';byId('result').classList.add('hidden');setText('notice','');};
-  byId('csvFile').onchange=async event=>{const file=event.target.files[0];if(file){byId('csvText').value=await file.text();setText('notice',`已读取 ${file.name}；数据未上传。`);}};
+  function download(name,text,type='text/csv;charset=utf-8'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\uFEFF'+text],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+  function resetInputState() { loadVersion++; current=null; mappingText=null; byId('mappingConfirmed').checked=false; byId('mappingPanel').classList.add('hidden'); byId('result').classList.add('hidden'); }
+  function showMapping() {
+    current=null; byId('result').classList.add('hidden');
+    byId('mappingPanel').classList.add('hidden'); mappingText=null; byId('mappingConfirmed').checked=false;
+    try {
+      const text=byId('csvText').value, inspected=SalesIntake.inspect(text);
+      const controls=SalesIntake.fields.map(([field,label])=>{
+        const group=document.createElement('div'), caption=document.createElement('label'), select=document.createElement('select');
+        select.id=`map-${field}`; caption.htmlFor=select.id; caption.textContent=`${label} · ${field}`;
+        const empty=document.createElement('option'); empty.value=''; empty.textContent=field==='source'?'不指定来源':'请选择一列'; select.append(empty);
+        inspected.columns.forEach(column=>{const option=document.createElement('option'); option.value=column; option.textContent=column; select.append(option);});
+        select.value=inspected.suggested[field]; select.onchange=()=>{byId('mappingConfirmed').checked=false;current=null;byId('result').classList.add('hidden');}; group.append(caption,select); return group;
+      });
+      byId('mappingFields').replaceChildren(...controls); mappingText=text; byId('mappingPanel').classList.remove('hidden');
+      setText('notice',`发现 ${inspected.columns.length} 列、${inspected.rows} 行。请确认列含义后审计。`);
+    } catch(error) { setText('notice',`无法读取表头：${error.message}。请检查 CSV 或使用输入模板。`); }
+  }
+  byId('csvText').oninput=()=>{resetInputState();setText('notice','输入已变化，请重新审计。');};
+  byId('sampleButton').onclick=()=>{resetInputState();byId('csvFile').value='';byId('csvText').value=byId('sampleData').textContent.trim()+'\n';setText('notice','已加载合成示例 / Synthetic sample loaded');};
+  byId('auditButton').onclick=()=>{const result=SalesAudit.analyzeCsv(byId('csvText').value);render(result);setText('notice','审计完成；请先看状态和 Issues。');if(result.issues.some(issue=>issue.code.startsWith('MISSING_COLUMNS:')))showMapping();};
+  byId('mappingButton').onclick=showMapping;
+  byId('applyMapping').onclick=()=>{
+    if(!byId('mappingConfirmed').checked){setText('notice','请先核对列含义并勾选确认。');return;}
+    if(mappingText!==byId('csvText').value){resetInputState();setText('notice','输入已变化，请重新对应表头。');return;}
+    try { const mapping=Object.fromEntries(SalesIntake.fields.map(([field])=>[field,byId(`map-${field}`).value]));render(SalesAudit.analyzeCsv(SalesIntake.mappedCsv(mappingText,mapping)));setText('notice','已按确认的列对应审计；没有转换金额、币种或日期。'); }
+    catch(error) { setText('notice',`请为必填字段各选一列，不能重复使用同一列：${error.message}`); }
+  };
+  byId('clearButton').onclick=()=>{resetInputState();byId('csvText').value='';byId('csvFile').value='';setText('notice','');};
+  byId('csvFile').onchange=async event=>{resetInputState();const version=loadVersion,file=event.target.files[0];if(file){try{const text=await file.text();if(version!==loadVersion)return;byId('csvText').value=text;setText('notice',`已读取 ${file.name}；数据未上传。`);}catch{setText('notice','文件读取失败，请重新选择 CSV。');}}};
   byId('downloadDaily').onclick=()=>download('daily.csv',SalesAudit.dailyCsv(current)); byId('downloadIssues').onclick=()=>download('issues.csv',SalesAudit.issuesCsv(current));
-  byId('copyBrief').onclick=async()=>{const text='Representative source: [export/API/site]\nRequired fields: [list]\nBusiness day/time zone: [value]\nSales/cost/profit rules: [rules]\nDuplicate/refund rules: [rules]\nExpected output and acceptance: [details]';try{await navigator.clipboard.writeText(text);setText('notice','试点需求模板已复制。');}catch{setText('notice','浏览器不允许复制；请手动记录来源、字段、口径和验收。');}};
+  const makeBrief=()=>SalesIntake.brief({need:byId('pilotNeed').value,frequency:byId('pilotFrequency').value,discovery:byId('pilotDiscovery').value});
+  function updateBrief(){byId('briefPreview').value=makeBrief();}
+  ['pilotNeed','pilotFrequency','pilotDiscovery'].forEach(id=>{byId(id).onchange=updateBrief;});updateBrief();
+  byId('downloadBrief').onclick=()=>{download('pilot-request.md',makeBrief(),'text/markdown;charset=utf-8');setText('pilotNotice','需求草稿已下载到本地；尚未提交。');};
+  byId('copyBrief').onclick=async()=>{try{await navigator.clipboard.writeText(makeBrief());setText('pilotNotice','需求草稿已复制；尚未提交。');}catch{setText('pilotNotice','无法自动复制，请展开预览后手动复制，或下载草稿。');}};
   if (new URLSearchParams(location.search).get('demo') === '1') { byId('sampleButton').click(); byId('auditButton').click(); }
 </script>
 </body>

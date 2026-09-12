@@ -1,8 +1,15 @@
 # Sales CSV Audit｜免费销售数据审计
 
-发布状态：**PUBLISHED**。许可证：[MIT](LICENSE)。证据是 **SYNTHETIC / PARTIAL / CSV ONLY**；没有真实客户、客户案例、付款或收入证明。
+发布状态：**PUBLISHING**。版本：0.2.0。许可证：[MIT](LICENSE)。证据是 **SYNTHETIC / PARTIAL / CSV ONLY**；没有真实客户、客户案例、付款或收入证明。
 
-网站：[打开工具](https://bird89757bird-a11y.github.io/sales-csv-audit/) · [自动加载合成演示](https://bird89757bird-a11y.github.io/sales-csv-audit/?demo=1)。2026-09-12 已完成线上验收：HTTP 200、固定样例、文件选择、两份 CSV 实际下载及手机布局通过，浏览器无脚本异常，未观察到文件上传请求。详见 [验收记录](verification/live.json)。
+网站：[打开工具](https://bird89757bird-a11y.github.io/sales-csv-audit/) · [自动加载合成演示](https://bird89757bird-a11y.github.io/sales-csv-audit/?demo=1)。0.1 版已上线并验收，记录见 [首版验收](verification/live.json)；0.2.0 正在发布。
+
+本次更新：
+
+- 使用 [输入模板](template.csv) 开始；全部为合成数据。
+- 自己的列名不同时，点击“对应我的表头”，核对单件售价 / 单件成本等含义，再执行审计。仅转换列名和顺序，金额、日期、币种及行唯一性规则保持不变。
+- 下载或复制需求草稿；草稿不包含 CSV 文件名、表头、明细、金额或统计结果。
+- [通过 GitHub 提交需求](https://github.com/bird89757bird-a11y/sales-csv-audit/issues/new?template=pilot.yml)：需要 GitHub 账号且内容公开，请仅填写合成描述。工具不会自动提交，也不收集邮箱。
 
 一个无需账号、API 或云服务的浏览器工具。它在本地检查销售 CSV，展示接受行、重复行、拒绝行、销售额、成本、简化毛利和每日汇总，并下载 `daily.csv` 与 `issues.csv`。
 
@@ -15,11 +22,12 @@
 ```powershell
 node tests/acceptance.mjs
 node tests/adversarial.mjs
+node tests/intake.mjs
 ```
 
 工具适合公开展示数据核对方法，并邀请潜在客户提供一份不含隐私的字段样例，定义一个代表性付费试点。当前工具没有实时网页/邮箱连接器、11 来源覆盖、云调度、通知或 XLSX；简化毛利也不是完整会计利润。
 
-本项目通过公开 GitHub 仓库和 GitHub Pages 提供静态工具；发布不代表已获得合格曝光、客户样例或付款。工具不收集邮箱，推广实验尚未开始。
+本项目通过公开 GitHub 仓库和 GitHub Pages 提供静态工具；发布不代表已获得合格曝光、客户样例或付款。GitHub 需求入口用于主动提交；推广实验尚未开始。
 
 发布前请先读 `launch-kit.md` 和 `release-manifest.json`，再运行：
 
