@@ -1,0 +1,56 @@
+{
+  "checked_at": "2026-09-12T07:53:38.547Z",
+  "phase": "live",
+  "base": "https://bird89757bird-a11y.github.io/sales-csv-audit/",
+  "http_status": 200,
+  "checks": {
+    "fixed_sample": true,
+    "existing_csv_downloads": true,
+    "template_download": true,
+    "renamed_file_mapping": true,
+    "explicit_mapping_confirmation": true,
+    "mapping_change_invalidates_result": true,
+    "input_change_invalidates_mapping": true,
+    "brief_download": true,
+    "brief_excludes_csv_canaries": true,
+    "public_issue_link_static": true,
+    "mobile_no_overflow": true,
+    "no_browser_errors": true,
+    "no_data_upload_requests": true,
+    "business_choices_in_brief": true,
+    "unknown_input_needs_confirmation": true,
+    "ready_sample_guidance": true,
+    "unsupported_scope_not_promised": true,
+    "pilot_scope_download": true
+  },
+  "downloads": [
+    {
+      "name": "daily.csv",
+      "bytes": 243,
+      "sha256": "ad809c3a1b2b18774c5ec8699f4aa4da4e7970c424393f0deb0f32c48418ff62"
+    },
+    {
+      "name": "issues.csv",
+      "bytes": 242,
+      "sha256": "da0c9c07574514fb89ba6e8ae8192f1403f3be932cddb0d9ec259ff74d1bd34f"
+    },
+    {
+      "name": "sales-template.csv",
+      "bytes": 95,
+      "sha256": "9175f18d3f07c7e5060033cf7523ec974392317ba8ecafbb1c30ff1820f9ab2c"
+    },
+    {
+      "name": "pilot-request.md",
+      "bytes": 1568,
+      "sha256": "732d78c7c9846755e0ff03f8ff35557c2456eb9df77c3e753f7258aa52e86897"
+    }
+  ],
+  "version": "0.3.0",
+  "source_commit": "51fff79da3d8ca12c2c7100d3defce926d5a5ff0",
+  "runtime_sha256": {
+    "index.html": "281ece436a2595353d9d7adaf02265e74414e093a02528fae821ced228fb8105",
+    "app.js": "81a78e13a9633df6e0909f5f3a90260255069d457f65b9dcfcb33acde70409ed",
+    "intake.js": "4c08c216a08f71ae9e1f1f2d8c376e5e44784ec475abde047b664f8fc862adc5",
+    "pilot-scope.md": "812f35671f45a89dc2ea15e2dd7fcc148093fd4a442ce4330d91ae9a164e40bb"
+  }
+}

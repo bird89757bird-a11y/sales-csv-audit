@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release_state": "PUBLISHING",
+  "release_state": "PUBLISHED",
   "customer_data": "NONE",
   "files": [
     {
@@ -35,12 +35,12 @@
     },
     {
       "path": "README.md",
-      "sha256": "13def4a8474e9144700126ba79f39a88c723d84406ed3b1f75c8a3f078a4d91a",
+      "sha256": "0de8c0d2252289b9c5e5f30c724b1ce343a69ae2af733a56eaca3079a6e9f6b8",
       "binary": false
     },
     {
       "path": "launch-kit.md",
-      "sha256": "1a3cedf6b19581629d3c2bff1f2888a52e77f38a0ea9f7c9abf80dfbbf7ce857",
+      "sha256": "703990736abb7b5dad526fce7115a353604eb4617aedc214cfcd941cf2e279c1",
       "binary": false
     },
     {
@@ -117,6 +117,11 @@
       "path": "pilot-scope.md",
       "binary": false,
       "sha256": "812f35671f45a89dc2ea15e2dd7fcc148093fd4a442ce4330d91ae9a164e40bb"
+    },
+    {
+      "path": "verification/iteration-03.json",
+      "binary": false,
+      "sha256": "c7c8e77ffb7fbf1800613c292c5a172d5970e7facf853c6915184993141fa34f"
     }
   ],
   "excluded": [
@@ -128,5 +133,5 @@
   "license": "MIT",
   "hosting": "GitHub Pages; public repository; main branch root",
   "version": "0.3.0",
-  "verified_at": "2026-09-12T07:20:10.999Z"
+  "verified_at": "2026-09-12T07:53:38.547Z"
 }

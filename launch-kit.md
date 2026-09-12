@@ -1,10 +1,10 @@
 # Sales CSV Audit｜零付费发布与验证
 
-发布状态：**PUBLISHING**。版本：0.3.0。证据状态：**SYNTHETIC / PARTIAL / CSV ONLY**。没有真实客户、客户案例、付款或收入证明。
+发布状态：**PUBLISHED**。版本：0.3.0。证据状态：**SYNTHETIC / PARTIAL / CSV ONLY**。没有真实客户、客户案例、付款或收入证明。
 
 0.3.0 增加格式、耗时和样例准备情况，并提供试点范围与验收模板。草稿包含所选的业务信息，不包含原始 CSV。不同格式和跨表比较先评估，尚未增加这些处理能力。上线不计作合格曝光或成交。
 
-历史 0.2.0 上线后的 13 项浏览器检查记录在 `verification/iteration-02.json`。本轮使用金额回归、需求边界测试和发布文件核对，不把历史记录当作本轮浏览器验收。
+本轮 18 项线上浏览器检查通过，记录在 `verification/iteration-03.json`，覆盖新增业务选项、范围提示、模板下载、草稿数据隔离和手机布局。金额回归、需求边界测试及发布文件核对同时保留。历史 0.2.0 验收单独保存在 `verification/iteration-02.json`。
 
 许可证：MIT。网站：https://bird89757bird-a11y.github.io/sales-csv-audit/ 。2026-09-12 线上页面、样例、文件选择、两份 CSV 实际下载及手机布局验收通过，记录在 `verification/live.json`；以下外发文案仍为草稿，五次合格曝光尚未执行。
 

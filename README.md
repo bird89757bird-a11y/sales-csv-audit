@@ -1,8 +1,8 @@
 # Sales CSV Audit｜免费销售数据审计
 
-发布状态：**PUBLISHING**。版本：0.3.0。许可证：[MIT](LICENSE)。证据是 **SYNTHETIC / PARTIAL / CSV ONLY**；没有真实客户、客户案例、付款或收入证明。
+发布状态：**PUBLISHED**。版本：0.3.0。许可证：[MIT](LICENSE)。证据是 **SYNTHETIC / PARTIAL / CSV ONLY**；没有真实客户、客户案例、付款或收入证明。
 
-网站：[打开工具](https://bird89757bird-a11y.github.io/sales-csv-audit/) · [自动加载合成演示](https://bird89757bird-a11y.github.io/sales-csv-audit/?demo=1&v=0.3.0)。本轮覆盖试点范围与需求分流，金额核心保持不变。0.2.0 的 13 项浏览器检查见 [历史验收](verification/iteration-02.json)，不作为本轮浏览器测试记录。
+网站：[打开工具](https://bird89757bird-a11y.github.io/sales-csv-audit/) · [自动加载合成演示](https://bird89757bird-a11y.github.io/sales-csv-audit/?demo=1&v=0.3.0)。本轮通过 18 项线上浏览器检查，覆盖试点范围、需求分流、下载及手机布局，详见 [0.3.0 验收](verification/iteration-03.json)。金额核心保持不变；[0.2.0 验收](verification/iteration-02.json) 保留为历史记录。
 
 本次更新：
 
