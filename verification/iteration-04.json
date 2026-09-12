@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "version": "0.4.0",
+  "verified_at": "2026-09-12T08:06:36.857Z",
+  "validated_source_commit": "0e28d2831b8e1d8ba5e4d8b4500f7df3d02afa59",
+  "local": {
+    "checked_at": "2026-09-12T08:06:32.348Z",
+    "phase": "local",
+    "base": "http://127.0.0.1:8764/",
+    "http_status": 200,
+    "checks": {
+      "fixed_sample": true,
+      "effort_estimate_weekly": true,
+      "effort_estimate_daily": true,
+      "unknown_frequency_guidance": true,
+      "incomplete_input_guidance": true,
+      "brief_derived_cost_only": true,
+      "mobile_no_overflow": true,
+      "no_browser_errors": true,
+      "no_data_upload_requests": true
+    }
+  },
+  "live": {
+    "checked_at": "2026-09-12T08:06:36.857Z",
+    "phase": "live",
+    "base": "https://bird89757bird-a11y.github.io/sales-csv-audit/",
+    "http_status": 200,
+    "checks": {
+      "fixed_sample": true,
+      "effort_estimate_weekly": true,
+      "effort_estimate_daily": true,
+      "unknown_frequency_guidance": true,
+      "incomplete_input_guidance": true,
+      "brief_derived_cost_only": true,
+      "mobile_no_overflow": true,
+      "no_browser_errors": true,
+      "no_data_upload_requests": true
+    }
+  },
+  "claims": {
+    "local_only": true,
+    "no_customer_data": true,
+    "estimate_is_time_value_only": true,
+    "not_a_quote_or_roi": true
+  }
+}
