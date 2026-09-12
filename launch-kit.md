@@ -1,8 +1,8 @@
 # Sales CSV Audit｜零付费发布与验证
 
-发布状态：**PUBLISHING**。证据状态：**SYNTHETIC / PARTIAL / CSV ONLY**。没有真实客户、客户案例、付款或收入证明。
+发布状态：**PUBLISHED**。证据状态：**SYNTHETIC / PARTIAL / CSV ONLY**。没有真实客户、客户案例、付款或收入证明。
 
-许可证：MIT。目标网站：https://bird89757bird-a11y.github.io/sales-csv-audit/ 。正在等待首次部署与线上验收；以下外发文案仍为草稿，五次合格曝光尚未执行。
+许可证：MIT。网站：https://bird89757bird-a11y.github.io/sales-csv-audit/ 。2026-09-12 线上页面、样例、文件选择、两份 CSV 实际下载及手机布局验收通过，记录在 `verification/live.json`；以下外发文案仍为草稿，五次合格曝光尚未执行。
 
 ## 一句话定位
 

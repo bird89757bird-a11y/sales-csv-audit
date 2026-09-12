@@ -1,8 +1,8 @@
 # Sales CSV Audit｜免费销售数据审计
 
-发布状态：**PUBLISHING**。许可证：[MIT](LICENSE)。证据是 **SYNTHETIC / PARTIAL / CSV ONLY**；没有真实客户、客户案例、付款或收入证明。
+发布状态：**PUBLISHED**。许可证：[MIT](LICENSE)。证据是 **SYNTHETIC / PARTIAL / CSV ONLY**；没有真实客户、客户案例、付款或收入证明。
 
-网站目标地址：[打开工具](https://bird89757bird-a11y.github.io/sales-csv-audit/) · [自动加载合成演示](https://bird89757bird-a11y.github.io/sales-csv-audit/?demo=1)。正在等待首次部署与线上验收。
+网站：[打开工具](https://bird89757bird-a11y.github.io/sales-csv-audit/) · [自动加载合成演示](https://bird89757bird-a11y.github.io/sales-csv-audit/?demo=1)。2026-09-12 已完成线上验收：HTTP 200、固定样例、文件选择、两份 CSV 实际下载及手机布局通过，浏览器无脚本异常，未观察到文件上传请求。详见 [验收记录](verification/live.json)。
 
 一个无需账号、API 或云服务的浏览器工具。它在本地检查销售 CSV，展示接受行、重复行、拒绝行、销售额、成本、简化毛利和每日汇总，并下载 `daily.csv` 与 `issues.csv`。
 

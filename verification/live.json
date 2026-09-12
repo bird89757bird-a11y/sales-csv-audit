@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-09-12T06:50:08.353Z",
+  "site_url": "https://bird89757bird-a11y.github.io/sales-csv-audit/",
+  "http_status": 200,
+  "ui": {
+    "statusPill": "PARTIAL",
+    "accepted": "5",
+    "duplicates": "2",
+    "rejected": "2",
+    "sales": "$101.26",
+    "cost": "$57.34",
+    "profit": "$43.92"
+  },
+  "daily_rows": 3,
+  "issue_rows": 4,
+  "downloads": [
+    {
+      "file": "daily.csv",
+      "bytes": 243,
+      "sha256": "ad809c3a1b2b18774c5ec8699f4aa4da4e7970c424393f0deb0f32c48418ff62"
+    },
+    {
+      "file": "issues.csv",
+      "bytes": 242,
+      "sha256": "da0c9c07574514fb89ba6e8ae8192f1403f3be932cddb0d9ec259ff74d1bd34f"
+    }
+  ],
+  "file_input_verified": true,
+  "mobile_no_page_overflow": true,
+  "browser_errors": [],
+  "data_requests": [],
+  "requests": [
+    {
+      "method": "GET",
+      "url": "https://bird89757bird-a11y.github.io/sales-csv-audit/?demo=1",
+      "type": "document"
+    },
+    {
+      "method": "GET",
+      "url": "https://bird89757bird-a11y.github.io/sales-csv-audit/app.js",
+      "type": "script"
+    }
+  ],
+  "verified_source_commit": "3b9868c1fc83f7ce904b8eef0cccd97af1a00098"
+}

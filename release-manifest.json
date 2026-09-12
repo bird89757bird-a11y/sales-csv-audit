@@ -1,7 +1,6 @@
 {
   "schema_version": 1,
-  "release_state": "PUBLISHING",
-  "hosting_candidate": "GitHub Free public repository, Pages from default branch root",
+  "release_state": "PUBLISHED",
   "customer_data": "NONE",
   "files": [
     {
@@ -36,12 +35,12 @@
     },
     {
       "path": "README.md",
-      "sha256": "48221b730eed9269ab592f5b9cc7cd5b602bf9ee47587e398952a8fcc412facb",
+      "sha256": "800d48085286be70154b2f4e3be343f3a513d0fb98a0b2768187dc7e7ed7390b",
       "binary": false
     },
     {
       "path": "launch-kit.md",
-      "sha256": "02834860c3f646a15261fb1bf8060060756270ac43525a0ac3affda8695a446a",
+      "sha256": "6b86c03a7e22e62d259230958eab579f9150eec4e33f47751c5de257c0655a8e",
       "binary": false
     },
     {
@@ -83,6 +82,11 @@
       "path": "LICENSE",
       "binary": false,
       "sha256": "8711a3992a6b6420df459fc4cc968e6565ede30e06bcf4667991a5550b441306"
+    },
+    {
+      "path": "verification/live.json",
+      "binary": false,
+      "sha256": "8fa6667ddfdfde31b677069f44d9e7c23c117323f246895fc2417dc0c7133daf"
     }
   ],
   "excluded": [
@@ -91,5 +95,7 @@
   ],
   "site_url": "https://bird89757bird-a11y.github.io/sales-csv-audit/",
   "repository_url": "https://github.com/bird89757bird-a11y/sales-csv-audit",
-  "license": "MIT"
+  "license": "MIT",
+  "verified_at": "2026-09-12T06:50:08.353Z",
+  "hosting": "GitHub Pages; public repository; main branch root"
 }
