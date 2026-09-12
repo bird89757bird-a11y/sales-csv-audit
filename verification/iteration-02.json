@@ -1,0 +1,44 @@
+{
+  "checked_at": "2026-09-12T07:20:10.999Z",
+  "phase": "live",
+  "base": "https://bird89757bird-a11y.github.io/sales-csv-audit/",
+  "http_status": 200,
+  "checks": {
+    "fixed_sample": true,
+    "existing_csv_downloads": true,
+    "template_download": true,
+    "renamed_file_mapping": true,
+    "explicit_mapping_confirmation": true,
+    "mapping_change_invalidates_result": true,
+    "input_change_invalidates_mapping": true,
+    "brief_download": true,
+    "brief_excludes_csv_canaries": true,
+    "public_issue_link_static": true,
+    "mobile_no_overflow": true,
+    "no_browser_errors": true,
+    "no_data_upload_requests": true
+  },
+  "downloads": [
+    {
+      "name": "daily.csv",
+      "bytes": 243,
+      "sha256": "ad809c3a1b2b18774c5ec8699f4aa4da4e7970c424393f0deb0f32c48418ff62"
+    },
+    {
+      "name": "issues.csv",
+      "bytes": 242,
+      "sha256": "da0c9c07574514fb89ba6e8ae8192f1403f3be932cddb0d9ec259ff74d1bd34f"
+    },
+    {
+      "name": "sales-template.csv",
+      "bytes": 95,
+      "sha256": "9175f18d3f07c7e5060033cf7523ec974392317ba8ecafbb1c30ff1820f9ab2c"
+    },
+    {
+      "name": "pilot-request.md",
+      "bytes": 1089,
+      "sha256": "0fa9f92d19f80f768cb00d387d7acd201d90f1c8fd28e7bfe01cfc61ad61a9db"
+    }
+  ],
+  "verified_source_commit": "97e4266c3c170e5f94f116a8f4030e7699f19b6f"
+}
