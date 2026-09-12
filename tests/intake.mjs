@@ -77,4 +77,26 @@ test('business choices survive in the brief while arbitrary values and CSV conte
   assert.doesNotMatch(intake.brief({...malicious,data:sample}), /PRIVATE-CANARY|<script>|DEMO-1/);
   assert.match(intake.brief(malicious), /数据格式：待确认/);
 });
+test('local effort estimate is deterministic and separates unknown frequency', () => {
+  const weekly = intake.estimate({frequency:'每周',minutes:30,hourlyValue:100,effortCurrency:'CNY'});
+  assert.deepEqual(weekly, {status:'READY',frequency:'每周',currency:'CNY',monthlyRuns:4.33,monthlyMinutes:129.9,monthlyCost:216.5});
+  assert.match(intake.formatEstimate(weekly), /约 130 分钟/);
+  assert.match(intake.formatEstimate(weekly), /¥216\.50/);
+  assert.equal(intake.estimate({frequency:'每天',minutes:30,hourlyValue:100,effortCurrency:'USD'}).monthlyCost, 1500);
+  assert.equal(intake.estimate({frequency:'每月',minutes:60,hourlyValue:50,effortCurrency:'EUR'}).monthlyCost, 50);
+  const missing = intake.estimate({frequency:'每周',minutes:'',hourlyValue:100});
+  assert.equal(missing.status, 'INCOMPLETE');
+  assert.match(intake.formatEstimate(missing), /填写每次耗时/);
+  const occasional = intake.estimate({frequency:'偶尔',minutes:30,hourlyValue:100});
+  assert.equal(occasional.status, 'FREQUENCY_UNDEFINED');
+  assert.match(intake.formatEstimate(occasional), /偶尔发生/);
+  assert.equal(intake.estimate({frequency:'每周',minutes:1441,hourlyValue:100}).status, 'INCOMPLETE');
+});
+test('brief includes only derived monthly estimate and never the hourly value or arbitrary text', () => {
+  const brief = intake.brief({frequency:'每周',minutes:30,hourlyValue:100,effortCurrency:'CNY'});
+  assert.match(brief, /本地人工时间价值估算（非报价）：¥216\.50 \/ 月/);
+  assert.doesNotMatch(brief, /100/);
+  const unknown = intake.brief({frequency:'偶尔',minutes:30,hourlyValue:100,effortCurrency:'CNY'});
+  assert.doesNotMatch(unknown, /本地人工时间价值估算/);
+});
 console.log(`${passed} intake tests passed`);

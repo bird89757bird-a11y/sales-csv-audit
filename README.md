@@ -1,14 +1,15 @@
 # Sales CSV Audit｜免费销售数据审计
 
-发布状态：**PUBLISHED**。版本：0.3.0。许可证：[MIT](LICENSE)。证据是 **SYNTHETIC / PARTIAL / CSV ONLY**；没有真实客户、客户案例、付款或收入证明。
+发布状态：**PUBLISHING**。版本：0.4.0。许可证：[MIT](LICENSE)。证据是 **SYNTHETIC / PARTIAL / CSV ONLY**；没有真实客户、客户案例、付款或收入证明。
 
-网站：[打开工具](https://bird89757bird-a11y.github.io/sales-csv-audit/) · [自动加载合成演示](https://bird89757bird-a11y.github.io/sales-csv-audit/?demo=1&v=0.3.0)。本轮通过 18 项线上浏览器检查，覆盖试点范围、需求分流、下载及手机布局，详见 [0.3.0 验收](verification/iteration-03.json)。金额核心保持不变；[0.2.0 验收](verification/iteration-02.json) 保留为历史记录。
+网站：[打开工具](https://bird89757bird-a11y.github.io/sales-csv-audit/) · [自动加载合成演示](https://bird89757bird-a11y.github.io/sales-csv-audit/?demo=1&v=0.4.0)。本轮增加本地人工时间价值估算，线上验收记录在 [0.4.0 验收](verification/iteration-04.json)。金额核心保持不变；[0.3.0 验收](verification/iteration-03.json) 保留为历史记录。
 
 本次更新：
 
 - 先选数据格式、每次人工耗时及样例准备情况，查看下一步建议；未确认的字段默认保持待确认。
 - Excel、PDF、实时接入与双表比较明确进入范围评估，不被误认为已支持的交付。
 - 提供 [试点范围与验收模板](pilot-scope.md)，说明结果文件、异常清单、执行说明和验收记录；价格、交期与维护范围待双方确认。
+- 可选估算每月重复的人工时间价值；缺少耗时、小时价值或固定频率时不输出金额，结果只用于判断是否值得试点。
 
 此前能力继续可用：
 

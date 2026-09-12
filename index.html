@@ -19,6 +19,7 @@
     .input-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
     label { display:block; font-weight:750; margin-bottom:8px; }
     textarea { width:100%; min-height:220px; resize:vertical; border:1px solid var(--line); border-radius:12px; padding:13px; background:#fbfaf3; color:var(--ink); font:13px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace; }
+    input[type=number] { width:100%; padding:10px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--ink); font:inherit; }
     .drop { display:flex; min-height:220px; align-items:center; justify-content:center; text-align:center; border:1px dashed #99a59e; border-radius:12px; background:#f7f8f2; padding:22px; }
     input[type=file] { max-width:100%; }
     button { border:0; border-radius:999px; padding:11px 17px; font:inherit; font-weight:760; cursor:pointer; background:var(--green); color:white; }
@@ -50,6 +51,7 @@
     .hidden { display:none; }
     a { color:var(--green); }
     .mapping, .pilot { margin-top:18px; }
+    .effort { margin-top:18px; }
     .form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
     select { width:100%; min-width:0; padding:10px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--ink); font:inherit; }
     .check { margin:16px 0; font-weight:500; }
@@ -107,6 +109,15 @@
       <div><label for="pilotDiscovery">从哪里发现工具？（可选）</label><select id="pilotDiscovery"><option>未选择</option><option>GitHub</option><option>X</option><option>搜索</option><option>朋友推荐</option><option>其他</option></select></div>
     </div>
     <p id="pilotNextStep" class="boundary" role="status" aria-live="polite"></p>
+    <details class="effort"><summary>估算每月重复的人工时间价值（可选）</summary>
+      <p class="hint">只在当前浏览器计算。它估算“现在花掉多少时间”，不代表报价、节省比例或投资回报。</p>
+      <div class="form-grid">
+        <div><label for="effortMinutes">每次耗时（分钟）</label><input id="effortMinutes" type="number" min="1" max="1440" step="1" inputmode="numeric" placeholder="例如 30"></div>
+        <div><label for="hourlyValue">时间价值 / 小时</label><input id="hourlyValue" type="number" min="0" max="100000" step="0.01" inputmode="decimal" placeholder="例如 100"></div>
+        <div><label for="effortCurrency">计价币种</label><select id="effortCurrency"><option value="CNY">人民币（¥）</option><option value="USD">美元（$）</option><option value="EUR">欧元（€）</option></select></div>
+      </div>
+      <p id="effortEstimate" class="boundary" role="status" aria-live="polite"></p>
+    </details>
     <details style="margin-top:14px"><summary>预览需求草稿</summary><label for="briefPreview" class="hint">草稿仅使用上面的选项，不读取你的 CSV 内容。</label><textarea id="briefPreview" readonly></textarea></details>
     <div class="actions"><button id="downloadBrief">下载需求草稿</button><button id="copyBrief" class="secondary">复制需求草稿</button><a id="requestPilot" class="link-button" href="https://github.com/bird89757bird-a11y/sales-csv-audit/issues/new?template=pilot.yml" target="_blank" rel="noopener noreferrer">通过 GitHub 提交（公开）</a></div>
     <p class="hint">下载和复制都只在本地进行。GitHub 提交需要账号，内容公开，请只填写合成描述；网页不会替你提交。也可以把草稿交给已有联系人。</p>
@@ -125,7 +136,7 @@ local_email,DEMO-3,2026-09-03,ITEM-C,USD,3,0.10,0.03
 local_email,EMAIL-5,2026-09-03,ITEM-E,USD,1,9.99,4.00
 local_email,EMAIL-MISSING,2026-09-03,ITEM-X,USD,1,5.00,</script>
 <script src="app.js"></script>
-<script src="intake.js?v=0.3.0"></script>
+<script src="intake.js?v=0.4.0"></script>
 <script>
   const byId = id => document.getElementById(id); let current = null, mappingText = null, loadVersion = 0;
   const setText = (id,value) => { byId(id).textContent = value; };
@@ -171,10 +182,10 @@ local_email,EMAIL-MISSING,2026-09-03,ITEM-X,USD,1,5.00,</script>
   byId('clearButton').onclick=()=>{resetInputState();byId('csvText').value='';byId('csvFile').value='';setText('notice','');};
   byId('csvFile').onchange=async event=>{resetInputState();const version=loadVersion,file=event.target.files[0];if(file){try{const text=await file.text();if(version!==loadVersion)return;byId('csvText').value=text;setText('notice',`已读取 ${file.name}；数据未上传。`);}catch{setText('notice','文件读取失败，请重新选择 CSV。');}}};
   byId('downloadDaily').onclick=()=>download('daily.csv',SalesAudit.dailyCsv(current)); byId('downloadIssues').onclick=()=>download('issues.csv',SalesAudit.issuesCsv(current));
-  const pilotSelection=()=>({need:byId('pilotNeed').value,frequency:byId('pilotFrequency').value,discovery:byId('pilotDiscovery').value,format:byId('pilotFormat').value,effort:byId('pilotEffort').value,sample:byId('pilotSample').value});
+  const pilotSelection=()=>({need:byId('pilotNeed').value,frequency:byId('pilotFrequency').value,discovery:byId('pilotDiscovery').value,format:byId('pilotFormat').value,effort:byId('pilotEffort').value,sample:byId('pilotSample').value,minutes:byId('effortMinutes').value,hourlyValue:byId('hourlyValue').value,effortCurrency:byId('effortCurrency').value});
   const makeBrief=()=>SalesIntake.brief(pilotSelection());
-  function updateBrief(){byId('briefPreview').value=makeBrief();setText('pilotNextStep',SalesIntake.nextStep(pilotSelection()));}
-  ['pilotNeed','pilotFrequency','pilotDiscovery','pilotFormat','pilotEffort','pilotSample'].forEach(id=>{byId(id).onchange=updateBrief;});updateBrief();
+  function updateBrief(){const selection=pilotSelection();byId('briefPreview').value=makeBrief();setText('pilotNextStep',SalesIntake.nextStep(selection));setText('effortEstimate',SalesIntake.formatEstimate(SalesIntake.estimate(selection)));}
+  ['pilotNeed','pilotFrequency','pilotDiscovery','pilotFormat','pilotEffort','pilotSample','effortMinutes','hourlyValue','effortCurrency'].forEach(id=>{byId(id).oninput=updateBrief;byId(id).onchange=updateBrief;});updateBrief();
   byId('downloadBrief').onclick=()=>{download('pilot-request.md',makeBrief(),'text/markdown;charset=utf-8');setText('pilotNotice','需求草稿已下载到本地；尚未提交。');};
   byId('copyBrief').onclick=async()=>{try{await navigator.clipboard.writeText(makeBrief());setText('pilotNotice','需求草稿已复制；尚未提交。');}catch{setText('pilotNotice','无法自动复制，请展开预览后手动复制，或下载草稿。');}};
   if (new URLSearchParams(location.search).get('demo') === '1') { byId('sampleButton').click(); byId('auditButton').click(); }

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release_state": "PUBLISHED",
+  "release_state": "PUBLISHING",
   "customer_data": "NONE",
   "files": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "281ece436a2595353d9d7adaf02265e74414e093a02528fae821ced228fb8105",
+      "sha256": "495dedc184a0bbd88a38997077636118a640171ac04fc2aafb86df1d2c0334b7",
       "binary": false
     },
     {
@@ -35,12 +35,12 @@
     },
     {
       "path": "README.md",
-      "sha256": "0de8c0d2252289b9c5e5f30c724b1ce343a69ae2af733a56eaca3079a6e9f6b8",
+      "sha256": "c09ce431feb7b624d84e3b236055b18aa96a06d47fd877d6748fe072a661a128",
       "binary": false
     },
     {
       "path": "launch-kit.md",
-      "sha256": "703990736abb7b5dad526fce7115a353604eb4617aedc214cfcd941cf2e279c1",
+      "sha256": "c7dd0bd018f8824d3cedda9a12b91627243822c23eff9e84d27d4fbc290b5e46",
       "binary": false
     },
     {
@@ -91,7 +91,7 @@
     {
       "path": "intake.js",
       "binary": false,
-      "sha256": "4c08c216a08f71ae9e1f1f2d8c376e5e44784ec475abde047b664f8fc862adc5"
+      "sha256": "a857a966b968cb8c230eaaaae51118bf38401166815e5c07b86eb67930d8e4b6"
     },
     {
       "path": "template.csv",
@@ -106,7 +106,7 @@
     {
       "path": "tests/intake.mjs",
       "binary": false,
-      "sha256": "b275e1815f9525f3e1a0833d70872eedaaaa292da53bd84758bc2dcf81e6eb3c"
+      "sha256": "0e68edd4b5aedeb2f0577c16dcd6d4cdc5da98470993ab0b6b11c991fb56fd6b"
     },
     {
       "path": "verification/iteration-02.json",
@@ -132,6 +132,5 @@
   "repository_url": "https://github.com/bird89757bird-a11y/sales-csv-audit",
   "license": "MIT",
   "hosting": "GitHub Pages; public repository; main branch root",
-  "version": "0.3.0",
-  "verified_at": "2026-09-12T07:53:38.547Z"
+  "version": "0.4.0"
 }

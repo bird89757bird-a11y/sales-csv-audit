@@ -48,7 +48,9 @@
     format: ['待确认', 'CSV 销售导出', 'Excel / XLSX', 'PDF / 邮件', '系统实时接入'],
     effort: ['待确认', '少于 15 分钟', '15–30 分钟', '30–60 分钟', '超过 60 分钟'],
     sample: ['待确认', '可以准备合成样例', '需要先确认字段', '暂时无法提供样例'],
+    effortCurrency: ['CNY', 'USD', 'EUR'],
   };
+  const frequencyRuns = {'每天': 30, '每周': 4.33, '每月': 1};
   function pick(selection) {
     return Object.fromEntries(Object.entries(options).map(([key, values]) => [key, values.includes(selection[key]) ? selection[key] : values[0]]));
   }
@@ -62,12 +64,38 @@
     }
     return '下一步核对样例：用模板说明一个正确结果和一个异常结果，再确认试点范围、价格与交期。当前演示不代表已接受交付。';
   }
+  function estimate(selection = {}) {
+    const frequency = ['每天', '每周', '每月', '偶尔'].includes(selection.frequency) ? selection.frequency : '每天';
+    const runs = frequencyRuns[frequency];
+    const minutes = Number(selection.minutes);
+    const hourlyValue = Number(selection.hourlyValue);
+    const currency = ['CNY', 'USD', 'EUR'].includes(selection.effortCurrency) ? selection.effortCurrency : 'CNY';
+    if (!runs) return {status: 'FREQUENCY_UNDEFINED', frequency, currency, monthlyRuns: null, monthlyMinutes: null, monthlyCost: null};
+    if (!Number.isFinite(minutes) || minutes <= 0 || minutes > 1440 || !Number.isFinite(hourlyValue) || hourlyValue < 0 || hourlyValue > 100000) {
+      return {status: 'INCOMPLETE', frequency, currency, monthlyRuns: runs, monthlyMinutes: null, monthlyCost: null};
+    }
+    const monthlyMinutes = Math.round(runs * minutes * 100) / 100;
+    const monthlyCost = Math.round(runs * minutes / 60 * hourlyValue * 100) / 100;
+    return {status: 'READY', frequency, currency, monthlyRuns: runs, monthlyMinutes, monthlyCost};
+  }
+  const moneySymbol = {CNY: '¥', USD: '$', EUR: '€'};
+  const formatEstimate = result => {
+    if (result.status === 'FREQUENCY_UNDEFINED') return '选择“每天、每周”或“每月”后，才能按固定频率估算；偶尔发生的工作请在试点记录中实测。';
+    if (result.status !== 'READY') return '填写每次耗时和你的时间价值后，这里会显示本地估算。只用于判断是否值得试点，不是报价或节省承诺。';
+    const runs = Number.isInteger(result.monthlyRuns) ? result.monthlyRuns : result.monthlyRuns.toFixed(2);
+    return `按${result.frequency}、每月约 ${runs} 次计算：每月约 ${result.monthlyMinutes.toFixed(0)} 分钟，时间价值约 ${moneySymbol[result.currency]}${result.monthlyCost.toFixed(2)}。这是本地估算，不是报价或收益承诺。`;
+  };
   function brief(selection = {}) {
     const picked = pick(selection);
+    const estimateResult = estimate(selection);
+    const estimateLine = estimateResult.status === 'READY'
+      ? `- 本地人工时间价值估算（非报价）：${moneySymbol[estimateResult.currency]}${estimateResult.monthlyCost.toFixed(2)} / 月，约 ${estimateResult.monthlyMinutes.toFixed(0)} 分钟\n`
+      : '';
     return '# 销售数据自动化试点需求草稿\n\n' +
       '这是一份待补充的需求，不代表报价、已提交或已承诺交付。\n\n' +
       `- 希望解决：${picked.need}\n- 发生频率：${picked.frequency}\n- 从哪里发现工具：${picked.discovery}\n` +
       `- 数据格式：${picked.format}\n- 当前每次人工耗时：${picked.effort}\n- 样例准备情况：${picked.sample}\n` +
+      estimateLine +
       '- 一个代表性来源：[例如某系统的销售导出]\n' +
       '- 希望输出：[日报 / 异常清单 / 差异解释]\n- 一个失败例子：[仅使用合成数据描述]\n' +
       '- 验收标准：[输入、预期金额口径、异常应如何处理]\n- 如涉及跨报表比较：[唯一键、同一日期范围、各自代表的业务口径]\n\n' +
@@ -80,5 +108,5 @@
       '可自行保存或交给已有联系人。GitHub 入口需要账号且内容公开，只提交合成描述。\n' +
       'https://github.com/bird89757bird-a11y/sales-csv-audit/issues/new?template=pilot.yml\n';
   }
-  return { fields, inspect, mappedCsv, options, nextStep, brief };
+  return { fields, inspect, mappedCsv, options, nextStep, estimate, formatEstimate, brief };
 });
