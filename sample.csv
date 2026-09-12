@@ -1,0 +1,10 @@
+source,line,day,item,currency,units,unit_sale,unit_cost
+local_html,DEMO-1,2026-09-01,ITEM-A,USD,3,19.99,8.25
+local_html,HTML-4,2026-09-03,ITEM-D,USD,2,5.50,2.25
+local_html,HTML-MISSING,2026-09-03,ITEM-X,,1,5.00,2.00
+local_csv,DEMO-2,2026-09-02,ITEM-B,USD,2,10.00,12.00
+local_csv,DEMO-3,2026-09-03,ITEM-C,USD,3,0.10,0.03
+local_csv,DEMO-3,2026-09-03,ITEM-C,USD,3,0.10,0.03
+local_email,DEMO-3,2026-09-03,ITEM-C,USD,3,0.10,0.03
+local_email,EMAIL-5,2026-09-03,ITEM-E,USD,1,9.99,4.00
+local_email,EMAIL-MISSING,2026-09-03,ITEM-X,USD,1,5.00,

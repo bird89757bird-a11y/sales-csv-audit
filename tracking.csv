@@ -1,0 +1,6 @@
+opportunity,date,channel,variant,view_or_reply,qualified,sample_received,paid_pilot,revenue,next_action,evidence
+E01,UNKNOWN,UNKNOWN,A,UNKNOWN,0,0,0,0,Select one real target,UNKNOWN
+E02,UNKNOWN,UNKNOWN,A,UNKNOWN,0,0,0,0,Wait until E01 is recorded,UNKNOWN
+E03,UNKNOWN,UNKNOWN,A,UNKNOWN,0,0,0,0,Wait until E02 is recorded,UNKNOWN
+E04,UNKNOWN,UNKNOWN,A,UNKNOWN,0,0,0,0,Wait until E03 is recorded,UNKNOWN
+E05,UNKNOWN,UNKNOWN,A,UNKNOWN,0,0,0,0,Review after five qualified exposures,UNKNOWN

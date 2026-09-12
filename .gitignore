@@ -1,0 +1,7 @@
+verification/edge-profile/
+verification/edge-headless-2/
+/PROGRESS.md
+/BLOCKED.md
+*.log
+.DS_Store
+Thumbs.db

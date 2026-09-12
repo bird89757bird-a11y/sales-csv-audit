@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "release_state": "PUBLISHING",
+  "hosting_candidate": "GitHub Free public repository, Pages from default branch root",
+  "customer_data": "NONE",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "c089985639038cc07dc37c07a8d0d543df7ddf9b1873a948000494a6e230530d",
+      "binary": false
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "d066dc7defad49b4744fd0f3785c315fd36fd129561a6a00a364cf954ddb51b4",
+      "binary": false
+    },
+    {
+      "path": ".nojekyll",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "binary": false
+    },
+    {
+      "path": "index.html",
+      "sha256": "47e81d665feaf269ceeb3b4d70281fab7ca421531763102d9712860295eb9fc9",
+      "binary": false
+    },
+    {
+      "path": "app.js",
+      "sha256": "b7f7c4a12927cf81b277f8d4a0f7f36848d5f87eae7a9fc8337819007b00f313",
+      "binary": false
+    },
+    {
+      "path": "sample.csv",
+      "sha256": "56412878cccdad34505135897a22cede2b37f9f9dc1baa5e4a4b8c37996129b3",
+      "binary": false
+    },
+    {
+      "path": "README.md",
+      "sha256": "48221b730eed9269ab592f5b9cc7cd5b602bf9ee47587e398952a8fcc412facb",
+      "binary": false
+    },
+    {
+      "path": "launch-kit.md",
+      "sha256": "02834860c3f646a15261fb1bf8060060756270ac43525a0ac3affda8695a446a",
+      "binary": false
+    },
+    {
+      "path": "tracking.csv",
+      "sha256": "022b59014aced737ef399b82e4dc3f53de7179963d09cc73cc8dc668d492e552",
+      "binary": false
+    },
+    {
+      "path": "tests/oracle.mjs",
+      "sha256": "7a2c1eedd52204f5ac8675c416886bdeee992f09bd6c5f139150f896832eb044",
+      "binary": false
+    },
+    {
+      "path": "tests/acceptance.mjs",
+      "sha256": "2a0365d54afaabf682fc75103f57218fe5af6d758e9b49de2806dab70e9dc5d1",
+      "binary": false
+    },
+    {
+      "path": "tests/adversarial.mjs",
+      "sha256": "a7a6ade4656334af21abeab383dc028ec0bcfebf4ad7e46e6131ffbaf743f06e",
+      "binary": false
+    },
+    {
+      "path": "tests/launch-preflight.mjs",
+      "sha256": "7a5691e3cb307170afabadec9b8948c225e5fe51e700816efe0de7b2556df79a",
+      "binary": false
+    },
+    {
+      "path": "verification/adversarial.json",
+      "sha256": "c99076c0daa696e9b8f89cb7be27459883228cc42a69eea369b8dc0ee18bc108",
+      "binary": false
+    },
+    {
+      "path": "verification/page.png",
+      "sha256": "b52c884bbba5a1bb535612ef3e5c6bf50cd4561599191bb73004decd9585ee68",
+      "binary": true
+    },
+    {
+      "path": "LICENSE",
+      "binary": false,
+      "sha256": "8711a3992a6b6420df459fc4cc968e6565ede30e06bcf4667991a5550b441306"
+    }
+  ],
+  "excluded": [
+    "verification/edge-profile/",
+    "verification/edge-headless-2/"
+  ],
+  "site_url": "https://bird89757bird-a11y.github.io/sales-csv-audit/",
+  "repository_url": "https://github.com/bird89757bird-a11y/sales-csv-audit",
+  "license": "MIT"
+}

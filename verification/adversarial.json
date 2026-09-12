@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "negative_case": "DEMO-1 unit_sale changed from 19.99 to 20.00",
+  "red_detected": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n    cost: 5734,\n+   profit: 4395,\n-   profit: 4392,\n    quantity: 11,\n+   sales: 10129\n-   sales: 10126\n  }\n",
+  "restored_green": true
+}
