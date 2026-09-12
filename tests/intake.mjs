@@ -99,4 +99,12 @@ test('brief includes only derived monthly estimate and never the hourly value or
   const unknown = intake.brief({frequency:'偶尔',minutes:30,hourlyValue:100,effortCurrency:'CNY'});
   assert.doesNotMatch(unknown, /本地人工时间价值估算/);
 });
+test('adjacent demand is captured as a bounded planning signal', () => {
+  const brief = intake.brief({expansion:'退款 / 手续费核对'});
+  assert.match(brief, /未来相邻需求（仅作范围记录）：退款 \/ 手续费核对/);
+  assert.match(brief, /另行评估/);
+  const invalid = intake.brief({expansion:'PRIVATE-CANARY'});
+  assert.match(invalid, /未来相邻需求（仅作范围记录）：待确认/);
+  assert.doesNotMatch(invalid, /PRIVATE-CANARY/);
+});
 console.log(`${passed} intake tests passed`);

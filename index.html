@@ -106,6 +106,7 @@
       <div><label for="pilotFormat">现在的数据格式</label><select id="pilotFormat"><option>待确认</option><option>CSV 销售导出</option><option>Excel / XLSX</option><option>PDF / 邮件</option><option>系统实时接入</option></select></div>
       <div><label for="pilotEffort">每次手工整理多久？（可选）</label><select id="pilotEffort"><option>待确认</option><option>少于 15 分钟</option><option>15–30 分钟</option><option>30–60 分钟</option><option>超过 60 分钟</option></select></div>
       <div><label for="pilotSample">能否准备合成样例？</label><select id="pilotSample"><option>待确认</option><option>可以准备合成样例</option><option>需要先确认字段</option><option>暂时无法提供样例</option></select></div>
+      <div><label for="pilotExpansion">未来还想解决什么？（可选）</label><select id="pilotExpansion"><option>待确认</option><option>销售日报</option><option>退款 / 手续费核对</option><option>库存 / 可售量核对</option><option>平台结算 / 回款核对</option><option>其他</option></select><p class="hint">只记录需求方向，不代表当前免费工具已支持。</p></div>
       <div><label for="pilotDiscovery">从哪里发现工具？（可选）</label><select id="pilotDiscovery"><option>未选择</option><option>GitHub</option><option>X</option><option>搜索</option><option>朋友推荐</option><option>其他</option></select></div>
     </div>
     <p id="pilotNextStep" class="boundary" role="status" aria-live="polite"></p>
@@ -136,7 +137,7 @@ local_email,DEMO-3,2026-09-03,ITEM-C,USD,3,0.10,0.03
 local_email,EMAIL-5,2026-09-03,ITEM-E,USD,1,9.99,4.00
 local_email,EMAIL-MISSING,2026-09-03,ITEM-X,USD,1,5.00,</script>
 <script src="app.js"></script>
-<script src="intake.js?v=0.4.0"></script>
+<script src="intake.js?v=0.5.0"></script>
 <script>
   const byId = id => document.getElementById(id); let current = null, mappingText = null, loadVersion = 0;
   const setText = (id,value) => { byId(id).textContent = value; };
@@ -182,10 +183,10 @@ local_email,EMAIL-MISSING,2026-09-03,ITEM-X,USD,1,5.00,</script>
   byId('clearButton').onclick=()=>{resetInputState();byId('csvText').value='';byId('csvFile').value='';setText('notice','');};
   byId('csvFile').onchange=async event=>{resetInputState();const version=loadVersion,file=event.target.files[0];if(file){try{const text=await file.text();if(version!==loadVersion)return;byId('csvText').value=text;setText('notice',`已读取 ${file.name}；数据未上传。`);}catch{setText('notice','文件读取失败，请重新选择 CSV。');}}};
   byId('downloadDaily').onclick=()=>download('daily.csv',SalesAudit.dailyCsv(current)); byId('downloadIssues').onclick=()=>download('issues.csv',SalesAudit.issuesCsv(current));
-  const pilotSelection=()=>({need:byId('pilotNeed').value,frequency:byId('pilotFrequency').value,discovery:byId('pilotDiscovery').value,format:byId('pilotFormat').value,effort:byId('pilotEffort').value,sample:byId('pilotSample').value,minutes:byId('effortMinutes').value,hourlyValue:byId('hourlyValue').value,effortCurrency:byId('effortCurrency').value});
+  const pilotSelection=()=>({need:byId('pilotNeed').value,frequency:byId('pilotFrequency').value,discovery:byId('pilotDiscovery').value,format:byId('pilotFormat').value,effort:byId('pilotEffort').value,sample:byId('pilotSample').value,expansion:byId('pilotExpansion').value,minutes:byId('effortMinutes').value,hourlyValue:byId('hourlyValue').value,effortCurrency:byId('effortCurrency').value});
   const makeBrief=()=>SalesIntake.brief(pilotSelection());
   function updateBrief(){const selection=pilotSelection();byId('briefPreview').value=makeBrief();setText('pilotNextStep',SalesIntake.nextStep(selection));setText('effortEstimate',SalesIntake.formatEstimate(SalesIntake.estimate(selection)));}
-  ['pilotNeed','pilotFrequency','pilotDiscovery','pilotFormat','pilotEffort','pilotSample','effortMinutes','hourlyValue','effortCurrency'].forEach(id=>{byId(id).oninput=updateBrief;byId(id).onchange=updateBrief;});updateBrief();
+  ['pilotNeed','pilotFrequency','pilotDiscovery','pilotFormat','pilotEffort','pilotSample','pilotExpansion','effortMinutes','hourlyValue','effortCurrency'].forEach(id=>{byId(id).oninput=updateBrief;byId(id).onchange=updateBrief;});updateBrief();
   byId('downloadBrief').onclick=()=>{download('pilot-request.md',makeBrief(),'text/markdown;charset=utf-8');setText('pilotNotice','需求草稿已下载到本地；尚未提交。');};
   byId('copyBrief').onclick=async()=>{try{await navigator.clipboard.writeText(makeBrief());setText('pilotNotice','需求草稿已复制；尚未提交。');}catch{setText('pilotNotice','无法自动复制，请展开预览后手动复制，或下载草稿。');}};
   if (new URLSearchParams(location.search).get('demo') === '1') { byId('sampleButton').click(); byId('auditButton').click(); }

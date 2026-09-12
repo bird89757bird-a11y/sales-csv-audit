@@ -48,6 +48,7 @@
     format: ['待确认', 'CSV 销售导出', 'Excel / XLSX', 'PDF / 邮件', '系统实时接入'],
     effort: ['待确认', '少于 15 分钟', '15–30 分钟', '30–60 分钟', '超过 60 分钟'],
     sample: ['待确认', '可以准备合成样例', '需要先确认字段', '暂时无法提供样例'],
+    expansion: ['待确认', '销售日报', '退款 / 手续费核对', '库存 / 可售量核对', '平台结算 / 回款核对', '其他'],
     effortCurrency: ['CNY', 'USD', 'EUR'],
   };
   const frequencyRuns = {'每天': 30, '每周': 4.33, '每月': 1};
@@ -95,6 +96,7 @@
       '这是一份待补充的需求，不代表报价、已提交或已承诺交付。\n\n' +
       `- 希望解决：${picked.need}\n- 发生频率：${picked.frequency}\n- 从哪里发现工具：${picked.discovery}\n` +
       `- 数据格式：${picked.format}\n- 当前每次人工耗时：${picked.effort}\n- 样例准备情况：${picked.sample}\n` +
+      `- 未来相邻需求（仅作范围记录）：${picked.expansion}\n` +
       estimateLine +
       '- 一个代表性来源：[例如某系统的销售导出]\n' +
       '- 希望输出：[日报 / 异常清单 / 差异解释]\n- 一个失败例子：[仅使用合成数据描述]\n' +
