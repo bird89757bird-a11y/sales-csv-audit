@@ -21,7 +21,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "47e81d665feaf269ceeb3b4d70281fab7ca421531763102d9712860295eb9fc9",
+      "sha256": "84fbad7740bf21e8ea22e56e87fa54d12b371853203c74dd0c6469fcb394b56b",
       "binary": false
     },
     {
@@ -76,7 +76,7 @@
     },
     {
       "path": "verification/page.png",
-      "sha256": "b52c884bbba5a1bb535612ef3e5c6bf50cd4561599191bb73004decd9585ee68",
+      "sha256": "e7eda4fc6a7dc70dca4fefbac3398f08a3426c722113209cc54f51af7e69e5bb",
       "binary": true
     },
     {
