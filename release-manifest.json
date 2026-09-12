@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release_state": "PUBLISHING",
+  "release_state": "PUBLISHED",
   "customer_data": "NONE",
   "files": [
     {
@@ -35,12 +35,12 @@
     },
     {
       "path": "README.md",
-      "sha256": "02fb0ad47b1b92479ecb21a028683199f239cd670ae833c90483be450caa7017",
+      "sha256": "d74ceb27ab23b621a4c1a5708d0d685dd68b8b43acbeb2a2bd708deb6435a7d9",
       "binary": false
     },
     {
       "path": "launch-kit.md",
-      "sha256": "ef94fd662e52ff4d48b4609aacad7b07540d2d2013361d9d49a942c8ac8c0f3d",
+      "sha256": "0e18e4e8477630ae928af2ee64e6d4d2f8dd5965296f3ffb52529232c2e06334",
       "binary": false
     },
     {
@@ -127,6 +127,11 @@
       "path": "verification/iteration-04.json",
       "binary": false,
       "sha256": "b2e920534ab9e79d6547f82e3ba466fe784cb1909c39d365c2758593128fda11"
+    },
+    {
+      "path": "verification/iteration-05.json",
+      "binary": false,
+      "sha256": "9e0199c4ddf0e1ac37bd955fa534f3b6270508bac0d21758e901482b5083ab3c"
     }
   ],
   "excluded": [
@@ -137,5 +142,6 @@
   "repository_url": "https://github.com/bird89757bird-a11y/sales-csv-audit",
   "license": "MIT",
   "hosting": "GitHub Pages; public repository; main branch root",
-  "version": "0.5.0"
+  "version": "0.5.0",
+  "verified_at": "2026-09-12T08:18:56.261Z"
 }
