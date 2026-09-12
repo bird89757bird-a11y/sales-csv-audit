@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release_state": "PUBLISHED",
+  "release_state": "PUBLISHING",
   "customer_data": "NONE",
   "files": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "74fe2b9f78c70c70e1f5cc028b7c80f562249ca8dd0e9a007ffc3ca1317aad0e",
+      "sha256": "281ece436a2595353d9d7adaf02265e74414e093a02528fae821ced228fb8105",
       "binary": false
     },
     {
@@ -35,12 +35,12 @@
     },
     {
       "path": "README.md",
-      "sha256": "5bbd9e2823a022a91efff466e107868f149733b4e25ae50f6b4996051dc0c35a",
+      "sha256": "13def4a8474e9144700126ba79f39a88c723d84406ed3b1f75c8a3f078a4d91a",
       "binary": false
     },
     {
       "path": "launch-kit.md",
-      "sha256": "2b480d5749879915bf66bd27237cbbd5d6c36496c06a21b35d12dd9d79b095a4",
+      "sha256": "1a3cedf6b19581629d3c2bff1f2888a52e77f38a0ea9f7c9abf80dfbbf7ce857",
       "binary": false
     },
     {
@@ -91,7 +91,7 @@
     {
       "path": "intake.js",
       "binary": false,
-      "sha256": "17b90657c4738a5f8fc757193480bdefd251f29b1fbfd9a6bbfc0da237c3f753"
+      "sha256": "4c08c216a08f71ae9e1f1f2d8c376e5e44784ec475abde047b664f8fc862adc5"
     },
     {
       "path": "template.csv",
@@ -101,17 +101,22 @@
     {
       "path": ".github/ISSUE_TEMPLATE/pilot.yml",
       "binary": false,
-      "sha256": "cb9bf6e30466086c392eb77deef3c752cf6b19cd95708aeb26ad27227f298ec5"
+      "sha256": "3c1a974471a7148cfa56490a13bbdf9c146d88df8aa85a2469d6bd90cf0c3e85"
     },
     {
       "path": "tests/intake.mjs",
       "binary": false,
-      "sha256": "5f68ffeb203d6a4a348ff2cd9ff3e0d82b3e43474ede0c0792de67a461519a16"
+      "sha256": "b275e1815f9525f3e1a0833d70872eedaaaa292da53bd84758bc2dcf81e6eb3c"
     },
     {
       "path": "verification/iteration-02.json",
       "binary": false,
       "sha256": "e049f6e7960d0627983718c733f7f5ad82fabe7f33525aa54c464b28f0f3fa89"
+    },
+    {
+      "path": "pilot-scope.md",
+      "binary": false,
+      "sha256": "812f35671f45a89dc2ea15e2dd7fcc148093fd4a442ce4330d91ae9a164e40bb"
     }
   ],
   "excluded": [
@@ -122,6 +127,6 @@
   "repository_url": "https://github.com/bird89757bird-a11y/sales-csv-audit",
   "license": "MIT",
   "hosting": "GitHub Pages; public repository; main branch root",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "verified_at": "2026-09-12T07:20:10.999Z"
 }

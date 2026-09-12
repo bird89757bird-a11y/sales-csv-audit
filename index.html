@@ -96,12 +96,17 @@
 
   <section class="card pilot" aria-labelledby="pilotTitle">
     <h2 id="pilotTitle">想减少每次手工整理的时间？</h2>
-    <p>先描述一个来源、一个期望输出和一个失败例子，再确认付费试点的范围与验收。</p>
+    <p>先用一个来源验证：你提供表头与 3–10 行合成样例，我们一起确认正确结果、异常规则，再讨论付费试点。</p>
+    <details style="margin-bottom:16px"><summary>付费试点交付什么？</summary><p>约定范围的结果文件、异常清单、重复执行说明和验收记录。用事先确认的样例核对；不确定的数据进入复核。免费工具可直接使用，试点、扩展实施和持续维护分别确认范围与报价。</p><p><a href="pilot-scope.md" download="pilot-scope.md">下载试点范围与验收模板</a></p></details>
     <div class="form-grid">
       <div><label for="pilotNeed">最想解决的步骤</label><select id="pilotNeed"><option>每天重复整理报表</option><option>检查一份 CSV</option><option>比较两份报表的差异</option></select></div>
       <div><label for="pilotFrequency">发生频率</label><select id="pilotFrequency"><option>每天</option><option>每周</option><option>每月</option><option>偶尔</option></select></div>
+      <div><label for="pilotFormat">现在的数据格式</label><select id="pilotFormat"><option>待确认</option><option>CSV 销售导出</option><option>Excel / XLSX</option><option>PDF / 邮件</option><option>系统实时接入</option></select></div>
+      <div><label for="pilotEffort">每次手工整理多久？（可选）</label><select id="pilotEffort"><option>待确认</option><option>少于 15 分钟</option><option>15–30 分钟</option><option>30–60 分钟</option><option>超过 60 分钟</option></select></div>
+      <div><label for="pilotSample">能否准备合成样例？</label><select id="pilotSample"><option>待确认</option><option>可以准备合成样例</option><option>需要先确认字段</option><option>暂时无法提供样例</option></select></div>
       <div><label for="pilotDiscovery">从哪里发现工具？（可选）</label><select id="pilotDiscovery"><option>未选择</option><option>GitHub</option><option>X</option><option>搜索</option><option>朋友推荐</option><option>其他</option></select></div>
     </div>
+    <p id="pilotNextStep" class="boundary" role="status" aria-live="polite"></p>
     <details style="margin-top:14px"><summary>预览需求草稿</summary><label for="briefPreview" class="hint">草稿仅使用上面的选项，不读取你的 CSV 内容。</label><textarea id="briefPreview" readonly></textarea></details>
     <div class="actions"><button id="downloadBrief">下载需求草稿</button><button id="copyBrief" class="secondary">复制需求草稿</button><a id="requestPilot" class="link-button" href="https://github.com/bird89757bird-a11y/sales-csv-audit/issues/new?template=pilot.yml" target="_blank" rel="noopener noreferrer">通过 GitHub 提交（公开）</a></div>
     <p class="hint">下载和复制都只在本地进行。GitHub 提交需要账号，内容公开，请只填写合成描述；网页不会替你提交。也可以把草稿交给已有联系人。</p>
@@ -120,7 +125,7 @@ local_email,DEMO-3,2026-09-03,ITEM-C,USD,3,0.10,0.03
 local_email,EMAIL-5,2026-09-03,ITEM-E,USD,1,9.99,4.00
 local_email,EMAIL-MISSING,2026-09-03,ITEM-X,USD,1,5.00,</script>
 <script src="app.js"></script>
-<script src="intake.js"></script>
+<script src="intake.js?v=0.3.0"></script>
 <script>
   const byId = id => document.getElementById(id); let current = null, mappingText = null, loadVersion = 0;
   const setText = (id,value) => { byId(id).textContent = value; };
@@ -166,9 +171,10 @@ local_email,EMAIL-MISSING,2026-09-03,ITEM-X,USD,1,5.00,</script>
   byId('clearButton').onclick=()=>{resetInputState();byId('csvText').value='';byId('csvFile').value='';setText('notice','');};
   byId('csvFile').onchange=async event=>{resetInputState();const version=loadVersion,file=event.target.files[0];if(file){try{const text=await file.text();if(version!==loadVersion)return;byId('csvText').value=text;setText('notice',`已读取 ${file.name}；数据未上传。`);}catch{setText('notice','文件读取失败，请重新选择 CSV。');}}};
   byId('downloadDaily').onclick=()=>download('daily.csv',SalesAudit.dailyCsv(current)); byId('downloadIssues').onclick=()=>download('issues.csv',SalesAudit.issuesCsv(current));
-  const makeBrief=()=>SalesIntake.brief({need:byId('pilotNeed').value,frequency:byId('pilotFrequency').value,discovery:byId('pilotDiscovery').value});
-  function updateBrief(){byId('briefPreview').value=makeBrief();}
-  ['pilotNeed','pilotFrequency','pilotDiscovery'].forEach(id=>{byId(id).onchange=updateBrief;});updateBrief();
+  const pilotSelection=()=>({need:byId('pilotNeed').value,frequency:byId('pilotFrequency').value,discovery:byId('pilotDiscovery').value,format:byId('pilotFormat').value,effort:byId('pilotEffort').value,sample:byId('pilotSample').value});
+  const makeBrief=()=>SalesIntake.brief(pilotSelection());
+  function updateBrief(){byId('briefPreview').value=makeBrief();setText('pilotNextStep',SalesIntake.nextStep(pilotSelection()));}
+  ['pilotNeed','pilotFrequency','pilotDiscovery','pilotFormat','pilotEffort','pilotSample'].forEach(id=>{byId(id).onchange=updateBrief;});updateBrief();
   byId('downloadBrief').onclick=()=>{download('pilot-request.md',makeBrief(),'text/markdown;charset=utf-8');setText('pilotNotice','需求草稿已下载到本地；尚未提交。');};
   byId('copyBrief').onclick=async()=>{try{await navigator.clipboard.writeText(makeBrief());setText('pilotNotice','需求草稿已复制；尚未提交。');}catch{setText('pilotNotice','无法自动复制，请展开预览后手动复制，或下载草稿。');}};
   if (new URLSearchParams(location.search).get('demo') === '1') { byId('sampleButton').click(); byId('auditButton').click(); }

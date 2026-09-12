@@ -18,6 +18,14 @@
       "validations": { "required": true }
     },
     {
+      "type": "dropdown", "id": "format",
+      "attributes": { "label": "现在的数据格式 / Input format", "options": ["待确认 / Unknown", "CSV 销售导出", "Excel / XLSX", "PDF / 邮件", "系统实时接入"] }
+    },
+    {
+      "type": "dropdown", "id": "sample",
+      "attributes": { "label": "样例准备情况 / Sample readiness", "options": ["待确认 / Unknown", "可以准备合成样例", "需要先确认字段", "暂时无法提供样例"] }
+    },
+    {
       "type": "textarea", "id": "acceptance",
       "attributes": { "label": "期望输出与验收 / Output and acceptance", "placeholder": "用合成例子说明一个正确结果、一个异常结果；注明是销售、退款、费用还是到账金额。" },
       "validations": { "required": true }

@@ -1,10 +1,16 @@
 # Sales CSV Audit｜免费销售数据审计
 
-发布状态：**PUBLISHED**。版本：0.2.0。许可证：[MIT](LICENSE)。证据是 **SYNTHETIC / PARTIAL / CSV ONLY**；没有真实客户、客户案例、付款或收入证明。
+发布状态：**PUBLISHING**。版本：0.3.0。许可证：[MIT](LICENSE)。证据是 **SYNTHETIC / PARTIAL / CSV ONLY**；没有真实客户、客户案例、付款或收入证明。
 
-网站：[打开工具](https://bird89757bird-a11y.github.io/sales-csv-audit/) · [自动加载合成演示](https://bird89757bird-a11y.github.io/sales-csv-audit/?demo=1)。0.2.0 已上线并通过 13 项浏览器检查，详见 [本次验收](verification/iteration-02.json)。[首版验收](verification/live.json) 保留为历史记录。
+网站：[打开工具](https://bird89757bird-a11y.github.io/sales-csv-audit/) · [自动加载合成演示](https://bird89757bird-a11y.github.io/sales-csv-audit/?demo=1&v=0.3.0)。本轮覆盖试点范围与需求分流，金额核心保持不变。0.2.0 的 13 项浏览器检查见 [历史验收](verification/iteration-02.json)，不作为本轮浏览器测试记录。
 
 本次更新：
+
+- 先选数据格式、每次人工耗时及样例准备情况，查看下一步建议；未确认的字段默认保持待确认。
+- Excel、PDF、实时接入与双表比较明确进入范围评估，不被误认为已支持的交付。
+- 提供 [试点范围与验收模板](pilot-scope.md)，说明结果文件、异常清单、执行说明和验收记录；价格、交期与维护范围待双方确认。
+
+此前能力继续可用：
 
 - 使用 [输入模板](template.csv) 开始；全部为合成数据。
 - 自己的列名不同时，点击“对应我的表头”，核对单件售价 / 单件成本等含义，再执行审计。仅转换列名和顺序，金额、日期、币种及行唯一性规则保持不变。

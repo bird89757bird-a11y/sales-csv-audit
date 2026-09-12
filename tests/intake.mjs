@@ -58,4 +58,23 @@ test('downloadable input template is a valid synthetic CSV with fixed totals', (
   assert.equal(result.status, 'PASS'); assert.equal(result.accepted, 1);
   assert.deepEqual(result.totals, {quantity:2,sales:200,cost:100,profit:100});
 });
+test('scope guidance does not turn unsupported formats or comparisons into accepted work', () => {
+  const ready = {format:'CSV 销售导出',sample:'可以准备合成样例'};
+  assert.match(intake.nextStep(), /先确认输入/);
+  assert.match(intake.nextStep(ready), /不代表已接受交付/);
+  for (const format of ['Excel / XLSX','PDF / 邮件','系统实时接入']) {
+    assert.match(intake.nextStep({...ready,format}), /超出当前/);
+  }
+  assert.match(intake.nextStep({...ready,need:'比较两份报表的差异'}), /超出当前/);
+  assert.match(intake.nextStep({...ready,sample:'暂时无法提供样例'}), /先确认输入/);
+});
+test('business choices survive in the brief while arbitrary values and CSV content stay out', () => {
+  const brief = intake.brief({format:'CSV 销售导出',effort:'30–60 分钟',sample:'可以准备合成样例'});
+  assert.match(brief, /当前每次人工耗时：30–60 分钟/);
+  assert.match(brief, /样例准备情况：可以准备合成样例/);
+  assert.match(brief, /异常清单、重复执行说明和验收记录/);
+  const malicious = Object.fromEntries(Object.keys(intake.options).map(key=>[key,'PRIVATE-CANARY <script>alert(1)</script>']));
+  assert.doesNotMatch(intake.brief({...malicious,data:sample}), /PRIVATE-CANARY|<script>|DEMO-1/);
+  assert.match(intake.brief(malicious), /数据格式：待确认/);
+});
 console.log(`${passed} intake tests passed`);
